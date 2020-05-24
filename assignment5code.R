@@ -22,8 +22,8 @@ for(i in 1:20001)
               (p_init*dnorm(x,mu_init[1],sig_init)+(1-p_init)*dnorm(x,mu_init[2],sig_init)))
   p[i]<-rbeta(1,sum(K==1)+1,sum(K==0)+1)
   sig[i]<-sqrt(1/rgamma(1,0.01+n/2,0.01+(sum((x[K==1]-mu_init[1])^2)+sum((x[K==0]-mu_init[2])^2))/2))
-  mu[i,1]<-rnorm(1,sum(K==1)*mean(x[K==1])*100/(100*sum(K==1)+sig[i]^2),100*sig[i]^2/(100*sum(K==1)+sig[i]^2))
-  mu[i,2]<-rnorm(1,sum(K==0)*mean(x[K==0])*100/(100*sum(K==0)+sig[i]^2),100*sig[i]^2/(100*sum(K==0)+sig[i]^2))
+  mu[i,1]<-rnorm(1,sum(K==1)*mean(x[K==1])*100/(100*sum(K==1)+sig[i]^2),sqrt(100*sig[i]^2/(100*sum(K==1)+sig[i]^2)))
+  mu[i,2]<-rnorm(1,sum(K==0)*mean(x[K==0])*100/(100*sum(K==0)+sig[i]^2),sqrt(100*sig[i]^2/(100*sum(K==0)+sig[i]^2)))
   p_init<-p[i]
   sig_init<-sig[i]
   mu_init<-mu[i,]
